@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Yodlr Admin Page</title>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<style>
+			table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+			th,
+			td {
+				border: 1px solid #ddd;
+				padding: 8px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>List of Users</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Email</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody id="usersList">
+				<!-- User data will be filled in here -->
+			</tbody>
+		</table>
+
+		<script>
+			$(document).ready(function () {
+				$.get("/users", function (data) {
+					const users = data;
+					let html = "";
+					users.forEach((user) => {
+						html += `
+            <tr>
+              <td>${user.id}</td>
+              <td>${user.email}</td>
+              <td>${user.firstName}</td>
+              <td>${user.lastName}</td>
+              <td>${user.state}</td>
+            </tr>
+          `;
+					});
+					$("#usersList").html(html);
+				});
+			});
+		</script>
+	</body>
+</html>
